@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Sistema Escolar</title>
+  <!-- Arquivos necessários para o Bootstrap -->
+  <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+  <!-- Carregando arquivos da biblioteca AST-Notif. Créditos: https://github.com/anandastoon/AST-Notif -->
+  <link rel="stylesheet" href="resources/AST-Notif/css/ast-notif.min.css">
+  <!-- Carregando arquivos da biblioteca driver.js. Créditos: https://github.com/kamranahmedse/driver.js -->
+  <link rel="stylesheet" href="resources/driver/driver.min.css">
+</head>
+<body>
+  <!-- Outros Arquivos necessários para o Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Inicialização do Firebase -->
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/8.1.1/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/8.1.1/firebase-auth.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-database.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-firestore.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-functions.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-storage.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-analytics.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-remote-config.js"></script>
+  <script defer src="/__/firebase/8.1.1/firebase-performance.js"></script>
+  <!-- 
+    initialize the SDK after all desired features are loaded, set useEmulator to false
+    to avoid connecting the SDK to running emulators.
+  -->
+  <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+  
+  <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" id="primeiroAcesso">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloPrimeiroAcesso">Primeiro Acesso</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body" id="corpoPrimeiroAcesso">
+          Ok! Iremos te guiar para o seu primeiro acesso<br> 
+          Mas agora diz aí, qual acesso você irá fazer?<br><br>
+          <a class="btn btn-primary btn-md btn-block" href="login.html#master" role="button">Master (Administrador do sistema)</a>
+         
+          <a class="btn btn-primary btn-md btn-block" role="button">Aluno</a>
+          
+          <a class="btn btn-primary btn-md btn-block" role="button">Secretaria</a>
+          
+          <a class="btn btn-primary btn-md btn-block" role="button">Professores</a>
+        </div>
+        <div class="modal-footer" id="botoesPrimeiroAcesso">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" id="entraSistema">
+    <div class="modal-dialog modal-xl" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloEntraSistema">Entrar</h5>
+          <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> -->
+        </div>
+        <div class="modal-body" id="corpoEntraSistema">
+          
+        </div>
+        <div class="modal-footer" id="botoesEntraSistema">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conteúdo do site - Website content -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2fa2f3;">
+      <a class="navbar-brand" href="./">Sistema escolar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="./">Início <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="adm.html">Administração</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="secretaria/">Secretaria</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="professores/">Professores</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Parte principal -->
+  <div class="container">
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Bem vindo!</h1>
+      <p class="lead">Você está na tela inicial do Sistema Escolar.</p>
+      <hr class="my-4">
+      <p>Primeiro nos conte o que deseja fazer:</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#primeiroAcesso" role="button">Primeiro Acesso</a>
+        <a class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#entraSistema" role="button">Entrar no sistema</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Carregando outros arquivos da biblioteca AST-Notif. Créditos: https://github.com/anandastoon/AST-Notif -->
+  <script src="resources/AST-Notif/js/ast-notif.min.js"></script>
+  <!-- Carregando arquivos da biblioteca driver.js. Créditos: https://github.com/kamranahmedse/driver.js -->
+  <script src="resources/driver/driver.min.js"></script>
+  <script src="js/tour.js"></script>
+</body>
+</html>
